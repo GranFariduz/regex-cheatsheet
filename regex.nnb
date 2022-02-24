@@ -1,0 +1,242 @@
+{
+    "cells": [
+        {
+            "language": "markdown",
+            "source": [
+                "## <strong>REGULAR EXPRESSIONS</strong>\r\n\r\nA regular expression is a sequence of characters that specifies a search pattern in text. <br />\r\nWe could use regular expressions to look for patterns in text.\r\nOr we could use it to match some pattern and replace it with something else, for example for cleaning up data.\r\n\r\n<br />"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "##### <i>REGEX IN JAVASCRIPT</i>\r\n\r\nIn JavaScript, we could use <code>.test</code>, <code>.match</code> methods to work with regex. <br /><br />\r\n<code>.test</code>: for checking if the regex matches something in the provided string. <br />\r\n<code>.match</code>: for extracting any values that matched the regex in the provided string."
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const s1 = \"The dog's name was Elsa\"\r\nconst reg = /Candice/\r\n\r\nreg.test(s1) // ==> false"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const w1 = \"EldenRing\"\r\nconst reg3 = /eldenring/i // i is for making it ignore case\r\n\r\nreg3.test(w1) // ==> true"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const s3 = \"March came in like a lion\"\r\nconst reg4 = /march/i\r\n\r\ns3.match(reg4) // ==> ['March']"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const s4 = \"twinkle, twinkle little star\"\r\nconst reg5 = /twinkle/g // tries to match every occurence of the regex\r\n\r\ns4.match(reg5) // ==> ['twinkle', 'twinkle']"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const w2 = \"wrinkle\"\r\nconst inkRegex = /..ink./ // '.' wildcard character is used to match ANY character except newline (\\n)\r\n\r\nw2.match(inkRegex) // ==> ['wrinkl']"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "<br />\r\n\r\n##### <i>ESCAPING</i>\r\n\r\n\r\n<code>\\\\</code>: Escape a reserved character <br />"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// \\ is the keyword for escaping reserved characters like '.', '[', ']' and even '\\' itself\r\n\r\nconst s20 = \"I am sed [T_T]\"\r\nconst boxBracketReg = /\\[T_T\\]/g // we can match with '[' and ']' because we escaped them using '\\' before them\r\n\r\ns20.match(boxBracketReg) // ==> '[T_T]'"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "<br />\r\n\r\n##### <i>GROUPS AND RANGES</i>\r\n\r\n\r\n<code>[...]</code>: Range (or character set) <br />\r\n<code>(...)</code>: Group <br />\r\n<code>[^...]</code>: Range negation <br />\r\n<code>(a|b)</code>: a or b in a group <br />"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// matching a set of characters\r\n\r\nconst s5 = \"bugs in above code\"\r\nconst reg6 = /b[uai]g/ // will match both 'bug', 'bag', 'big'\r\n\r\ns5.match(reg6) // ==> ['bug']"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// matching a range (also known as character set)\r\n\r\nconst s6 = \"A lot of stuff to do before turning 50\"\r\nconst aTodReg = /[a-d]/g\r\nconst zeroTo5Reg = /[0-5]/g\r\n\r\ns6.match(aTodReg) // ==> ['d', 'b']\r\ns6.match(zeroTo5Reg) // ==> ['5', '0']"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// not matching (negating) a range\r\n\r\nconst s7 = \"3 blind mice.\"\r\nconst noNumbersAndMiceReg = /[^0-9mice\\s]/g // a caret inside a [] means negation\r\n\r\ns7.match(noNumbersAndMiceReg) // ==> ['b', 'l', 'n', 'd', '.']"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// greedy and lazy matches\r\n\r\nconst s8 = \"titanic\"\r\nconst greedyReg = /t[a-z]*i/ // matches t, '0' or 'more' matches of a-z (greedy will pick 'more'), and then i\r\nconst lazyReg = /t[a-z]*?i/ // matches t, '0' or 'more' matches of a-z (lazy will pick '0'), and then i\r\n\r\ns8.match(greedyReg) // ==> ['titani']\r\ns8.match(lazyReg) // ==> ['ti']"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// match the start or the end\r\n\r\nconst s9 = \"Hesitation is defeat\"\r\nconst startWithHesitationReg = /^hesitation/i // a caret outside of [] is used for checking if the string starts with the pattern\r\nconst endWithDefeatReg = /defeat$/i\r\nconst startWithIsReg = /^is/i\r\n\r\ns9.match(startWithHesitationReg) // ==> ['Hesitation']\r\ns9.match(endWithDefeatReg) // ==> ['defeat']\r\ns9.match(startWithIsReg) // ==> null"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// capturing groups\r\n\r\nconst phone = \"255-232\"\r\nconst phone2 = \"255-255\"\r\nconst grpReg = /(\\d{3})-(\\d{3})/g // from left to right, anything inside '()' is a group\r\nconst backReferenceGrpReg = /(\\d{3})-\\1/g // referencing a group in the same regex is called back-referencing \r\n\r\n// we can access these groups by two notations:\r\n// 1. $<number>: Used in .replace. $1 will give us the first group from left to right.\r\n// 2. \\<number>: Used in .match. \\1 will give us a pattern exactly like how the first group pattern is.\r\n\r\nphone.replace(grpReg, '$2-$1') // ==> 232-255  (we reversed the order using groups)\r\nphone.match(backReferenceGrpReg) // ==> null  (did not match, because 232 is not the same as 255)\r\nphone2.match(backReferenceGrpReg) // ==> ['255-255']"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const s2 = \"James has a lion\"\r\nconst reg2 = /cat|dog|lion/g // tries to match with cat, dog or lion\r\nconst grpReg2 = /(cat|dog|lion)/g // same thing, but with a group\r\n\r\nreg2.test(s2) // ==> true\r\ns2.replace(grpReg2, '$1-$1') // ==> James has a lion-lion  (because it matches with 'lion')"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "<br />\r\n\r\n##### <i>CHARACTER CLASSES</i>\r\n\r\nSome shorthand classes to match a variety of cases.\r\n\r\n<code>\\w</code>: All letters, numbers and underscores <br />\r\n<code>\\W</code>: Not letters, numbers and underscores <br />\r\n<code>\\d</code>: All numbers <br />\r\n<code>\\D</code>: Not numbers <br />\r\n<code>\\s</code>: All whitespaces <br />\r\n<code>\\S</code>: Not whitespaces <br />\r\n<code>\\b</code>: Word boundary <br />\r\n<code>\\B</code>: Not word boundary <br />"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// match using \\w and \\W\r\n\r\nconst s10 = \"I am #10\"\r\nconst allLettersReg = /\\w/g\r\nconst noLettersReg = /\\W/g\r\n\r\ns10.match(allLettersReg) // ==> ['I', 'a', 'm', '1', '0']\r\ns10.match(noLettersReg) // ==> [' ', ' ', '#']"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// match using \\d and \\D\r\n\r\nconst s11 = \"255 ()\"\r\nconst allNumbersReg = /\\d/g\r\nconst noNumbersReg = /\\D/g\r\n\r\ns11.match(allLettersReg) // ==> ['2', '5', '5']\r\ns11.match(noLettersReg) // ==> [' ', '(', ')']"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// match using \\s and \\S\r\n\r\nconst s12 = \"24 AB\"\r\nconst whiteSpacesReg = /\\s/g\r\nconst nonWhiteSpacesReg = /\\S/g\r\n\r\ns12.match(whiteSpacesReg) // ==> [' ']\r\ns12.match(nonWhiteSpacesReg) // ==> ['2', '4', 'A', 'B']"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "const storeString = 'I went to the store and bought ten apples'\r\nconst tStartReg = /\\bt/g // matches all \"t's\" that are at start of words (in this case: 'to', 'the', 'ten')\r\nconst tEndReg = /t\\b/g // matches all \"t's\" that are at the end of words (in this case: 'went', 'bought')\r\nconst tnotStartReg = /\\Bt/g // ... that are NOT at the start of words (in this case: 'went', 'store', 'bought')\r\nconst tnotEndReg = /t\\B/g // ... that are not at the end of words (in this case: 'to', 'the', 'store', 'ten')\r\n\r\nstoreString.match(tStartReg) // ==> ['t', 't', 't']\r\nstoreString.match(tEndReg) // ==> ['t', 't']\r\nstoreString.match(tnotStartReg) // ==> ['t', 't', 't']\r\nstoreString.match(tnotEndReg) // ==> ['t', 't', 't', 't']"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "<br />\r\n\r\n##### <i>QUANTIFIERS</i>\r\n\r\n\r\n<code>*</code>: 0 or more occurences <br />\r\n<code>+</code>: 1 or more occurences <br />\r\n<code>?</code>: 0 or 1 occurence, also to make the expression ungreedy <br />\r\n<code>{0,5}</code>: 0 to 5 occurences <br />\r\n<code>{2,}</code>: 2 to infinite occurences <br />\r\n<code>{2,5}</code>: 2 to 5 occurences <br />\r\n<code>{2}</code>: exactly 2 occurences <br />"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// matching zero or more times\r\n\r\nconst w4 = \"goooal!!\"\r\nconst w5 = \"gunnneerr!!\"\r\nconst gAndZeroOrMoreOReg = /go*/g\r\n\r\nw4.match(gAndZeroOrMoreOReg) // ==> ['gooo']\r\nw5.match(gAndZeroOrMoreOReg) // ==> ['g']"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// matching one or more times\r\n\r\nconst w3 = \"Mississippi\"\r\nconst sOneOrMoreReg = /s+/g\r\n\r\nw3.match(sOneOrMoreReg) // ==> ['ss', 'ss']"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// matching 1 or more times\r\n\r\nconst s13 = 'pizzzza'\r\nconst z1OrMoreReg = /piz{2,}a/g\r\nconst zExactly3Reg = /piz{3}a/g\r\n\r\ns13.match(z1OrMoreReg) // ==> ['pizzzza']\r\ns13.match(zExactly3Reg) // ==> null"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// matching 0 or 1 time (meaning optional)\r\n\r\nconst s14 = 'favorite'\r\nconst s15 = 'favourite'\r\nconst favReg = /favou?rite/g // u is optional here\r\n\r\ns14.match(favReg) // ==> ['favorite']\r\ns15.match(favReg) // ==> ['favourite']"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "<br />\r\n\r\n##### <i>ASSERTIONS</i>\r\n\r\n\r\n<code>?=</code>: Lookahead assertion <br />\r\n<code>?!</code>: Negative Lookahead assertion <br />\r\n<code>?<=</code>: Lookbehind assertion <br />\r\n<code>?!= or ?<!</code>: Negative Lookbehind assertion <br />\r\n<code>?()</code>: Condition if, then <br />\r\n<code>?()|</code>: Condition if, then, else <br />"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// lookahead assertion: checks the match for an expression ahead of a given pattern\r\n\r\nconst s16 = \"Freedom is a rare thing to come by\"\r\nconst freeReg = /Free(?=dom)/g // if 'dom' is right after 'Free' in the string, this regex will return 'Free'\r\nconst byReg = /Free(?=by)/g // by does not come right after 'Free'\r\nconst freeToByReg = /Free.*(?=by)/g // this will work, because .* matches all characters after 'Free'\r\n\r\ns16.match(freeReg) // ==> ['Free']\r\ns16.match(byReg) // ==> null\r\ns16.match(freeToByReg) // ==> ['Freedom is a rare thing to come ']"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// negative lookahead assertion: checks that an expression DOES NOT match ahead of a given pattern\r\n\r\nconst s17 = \"The Good Doctor\"\r\nconst surgReg = /The Good (?!Surgeon)/g\r\n\r\ns17.match(surgReg) // ==> ['The Good ']  (because indeed 'Surgeon' is not ahead of 'The Good ' in the string)"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// lookbehind assertion: checks that an expression matches behind of a given pattern\r\n\r\nconst s18 = \"Malcontent whistle helps while fighting Demon of Hatred\"\r\nconst dohReg = /(?<=fighting) demon of hatred/ig\r\n\r\ns18.match(dohReg) // ==> [' Demon of Hatred']  (because indeed 'fighting' is just behind ' Demon of Hatred' in the string)"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// negative lookbehind assertion: checks that an expression DOES NOT match behind of a given pattern\r\n\r\nconst s19 = \"Use the Iron Fortress against Guardian Ape\"\r\nconst gApeReg = /(?<!against) Guardian Ape/ig\r\n\r\ns19.match(gApeReg) // ==> null  (because indeed 'against' is just behind ' Guardian Ape' in the string)"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "typescript",
+            "source": [
+                "// if, then, else assertion\r\n\r\n// syntax: (?(condition)then|else)\r\n\r\nconst s21 = 'Dog Pog Log'\r\nconst ifThenReg = /(.?(?=Dog)Do)/g   // if lookahead check for 'Dog' passes, match for 'Do'\r\nconst ifThenElseReg = /(.?(?=Nog)No|Lo)/g  // if lookahead check for 'Nog' passes, match for 'No', else match for 'Lo'\r\n\r\ns21.match(ifThenReg) // ==> ['Do']\r\ns21.match(ifThenElseReg) // ==> ['Lo']"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "<br /><br />\r\n\r\n##### <i>REGEX CHEATSHEET</i>\r\n\r\n![REGEX CHEATSHEET](regex-cheatsheet.jpg)"
+            ],
+            "outputs": []
+        }
+    ]
+}
