@@ -178,7 +178,7 @@
         {
             "language": "typescript",
             "source": [
-                "// matching 1 or more times\r\n\r\nconst s13 = 'pizzzza'\r\nconst z1OrMoreReg = /piz{2,}a/g\r\nconst zExactly3Reg = /piz{3}a/g\r\n\r\ns13.match(z1OrMoreReg) // ==> ['pizzzza']\r\ns13.match(zExactly3Reg) // ==> null"
+                "// matching using {} quantifier\r\n\r\nconst s13 = 'pizzzza'\r\nconst z2OrMoreReg = /piz{2,}a/g\r\nconst zExactly3Reg = /piz{3}a/g\r\n\r\ns13.match(z2OrMoreReg) // ==> ['pizzzza']\r\ns13.match(zExactly3Reg) // ==> null"
             ],
             "outputs": []
         },
